@@ -1,8 +1,4 @@
-#contenedor {
-    width: 800px; 
-}
-
-h1 {
+p {
     color: blue;
     height: 50px;
     margin-top: 30px;
@@ -10,9 +6,4 @@ h1 {
 
 #integer {
     color: blue;
-}
-
-.deleteTask {
-    display: auto;
-    float: right;
 }

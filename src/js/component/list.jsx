@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const List = () => {
     const [tarea, setTarea] = useState("");
@@ -41,6 +41,18 @@ const List = () => {
         }
     };
 
+    function createdUser() {
+        fetch('https://assets.breatheco.de/apis/fake/todos/user/sergioreverte10',{
+            method:'POST',
+            headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify([])})
+        .then((response)=>response.json())
+        .then((data)=>console.log(data))
+        .catch((error)=>console.log(error))
+    }
+
     return (
         <div className="container bg-warning-subtle" style={{ width: "500px" }}>
             <div className="">
@@ -58,9 +70,10 @@ const List = () => {
                     </ul>
                 </div>
             </form>
-            <div className="text" id="integer">
-                <footer>{tareas.length > 0 ? tareas.length + " items left" : ""}</footer>
+            <div>
+                <footer className=" badge rounded-pill text-bg-warning">{tareas.length > 0 ? tareas.length + " items left" : ""}</footer>
             </div>
+            <button className="btn btn-success" onClick={createdUser}>Crear usuario</button>
         </div>
     );
 };

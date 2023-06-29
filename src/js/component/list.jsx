@@ -53,6 +53,38 @@ const List = () => {
         .catch((error)=>console.log(error))
     }
 
+    function actualizarTarea() {
+        fetch('https://assets.breatheco.de/apis/fake/todos/user/sergioreverte10', {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(tareas)})
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .catch((error) => console.log(error))
+    }
+
+    function traerListTarea() {
+        fetch('https://assets.breatheco.de/apis/fake/todos/user/sergioreverte10', {
+            method: 'GET'})
+            .then((response) => { 
+                if (response.status == 404) {
+                    createdUser()                 
+                }; 
+                return response.json()})
+                .then((data) => console.log(data))
+                .catch((error) => console.log(error))
+    }
+
+    useEffect(()=>{
+        traerListTarea()
+    },[])
+
+    useEffect(()=>{
+            actualizarTarea()
+    },[tareas])
+
     return (
         <div className="container bg-warning-subtle" style={{ width: "500px" }}>
             <div className="">

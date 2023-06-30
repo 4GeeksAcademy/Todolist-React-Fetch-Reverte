@@ -3,3 +3,8 @@ p {
     height: 50px;
     margin-top: 30px;
 }
+
+body {
+    background-image: url('https://img.freepik.com/vector-gratis/fondo-blanco-gris-brillante-lineas-onduladas_1017-25101.jpg');
+    background-size: cover;
+  }

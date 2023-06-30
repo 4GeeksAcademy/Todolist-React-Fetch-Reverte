@@ -65,28 +65,41 @@ const List = () => {
             .catch((error) => console.log(error))
     }
 
-    function traerListTarea() {
+    function traerListaTarea() {
         fetch('https://assets.breatheco.de/apis/fake/todos/user/sergioreverte10', {
             method: 'GET'})
             .then((response) => { 
-                if (response.status == 404) {
+                if (response.status === 404) {
                     createdUser()                 
                 }; 
                 return response.json()})
-                .then((data) => console.log(data))
+                .then((data) => setTareas(data))
                 .catch((error) => console.log(error))
     }
 
+    function deleteUser() {
+        fetch('https://assets.breatheco.de/apis/fake/todos/user/sergioreverte10', {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json",
+            }})
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .catch((error) => console.log(error))
+    }
+
     useEffect(()=>{
-        traerListTarea()
+        traerListaTarea()
     },[])
 
     useEffect(()=>{
-            actualizarTarea()
+        if (tareas.length != 0) {
+            actualizarTarea()                      
+        }
     },[tareas])
 
     return (
-        <div className="container bg-warning-subtle" style={{ width: "500px" }}>
+        <div className="container bg-warning-subtle" style={{ width: "600px" }}>
             <div className="">
                 <p className="fs-2 text-center">To Do List</p>
             </div>
@@ -103,9 +116,11 @@ const List = () => {
                 </div>
             </form>
             <div>
-                <footer className=" badge rounded-pill text-bg-warning">{tareas.length > 0 ? tareas.length + " items left" : ""}</footer>
+            <footer className="badge rounded-pill text-bg-warning">{tareas.length > 0 && (tareas.length === 1 ? tareas.length + " item" : tareas.length + " items")}</footer>           
             </div>
-            <button className="btn btn-success" onClick={createdUser}>Crear usuario</button>
+            <div>
+                <button className="btn btn-danger btn-sm mt-3" onClick={deleteUser}>Eliminar Cuenta</button>
+            </div>
         </div>
     );
 };
